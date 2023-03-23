@@ -1,32 +1,38 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
 
-	static int N, K, sum, count;
-	static int[] arr;
-	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		K = sc.nextInt();
-		arr = new int[N];
-		
-		for (int i = 0; i < N; i++) {
-			arr[i] = sc.nextInt();
-		}
-		
-		count = 0; // 동전 갯수
+    static int N, K, cnt;
+    static Integer[] arr;
 
-		for (int i = N - 1; i >= 0; i--) {
-			
-			if (arr[i] <= K) { // 더한 값이 K보다 크면 넘어간다
-				
-				count += K / arr[i]; // 나눈 몫을 저장하면 해당 가치의 갯수가 저장된다
-				K = K % arr[i]; // 나눈 나머지를 K에 저장하여 넘긴다
-			}
-		}
-		
-		System.out.println(count);
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+        arr = new Integer[N];
+
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(arr, (x, y) -> y-x); // 내림차순 정렬
+//        System.out.println(Arrays.toString(arr));
+
+        cnt = 0; // 동전 개수 최솟값
+
+        for (int i = 0; i < N; i++) {
+            if (arr[i] <= K) {
+                cnt += K / arr[i];
+                K = K % arr[i];
+            }
+        }
+
+        System.out.println(cnt);
+    }
 }
