@@ -1,12 +1,11 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-        public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
-
-            int N = sc.nextInt();
-            for (int i = 1; i < N + 1; i++) {
-                System.out.println(i);
-            }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        for (int i = 1; i <= n; i++) {
+            System.out.println(i);
         }
+    }
 }
