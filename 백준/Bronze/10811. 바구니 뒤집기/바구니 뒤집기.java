@@ -16,13 +16,15 @@ public class Main {
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-            int I = Integer.parseInt(st.nextToken());
-            int J = Integer.parseInt(st.nextToken());
+            int left = Integer.parseInt(st.nextToken());
+            int right = Integer.parseInt(st.nextToken());
 
-            for (int j = I; j <= (I + J) / 2; j++) {
-                int tmp = arr[j];
-                arr[j] = arr[I + J - j];
-                arr[I + J - j] = tmp;
+            while (left < right) {
+                int tmp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = tmp;
+                left++;
+                right--;
             }
         }
 
