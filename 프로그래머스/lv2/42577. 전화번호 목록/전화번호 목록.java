@@ -11,7 +11,7 @@ class Solution {
 
         // 2. 맵 순회하면서 접두어인 경우 확인
         for (int i = 0; i < phone_book.length; i++) {
-            for (int j = 0; j < phone_book[i].length(); j++) {
+            for (int j = 1; j < phone_book[i].length(); j++) {
                 if (map.containsKey(phone_book[i].substring(0, j))) {
                     return false;
                 }
