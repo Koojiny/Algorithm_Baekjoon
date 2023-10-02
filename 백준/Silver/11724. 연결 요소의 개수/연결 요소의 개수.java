@@ -1,50 +1,46 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	
-	static ArrayList<Integer>[] adjList;
-	static int N, E;
-	static boolean[] visited;
-	static int cnt, result;
+    static ArrayList<Integer>[] A;
+    static boolean[] visited;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        visited = new boolean[N + 1];
+        A = new ArrayList[N + 1];
+        for (int i = 1; i < N + 1; i++) { // 인접 리스트 초기화
+            A[i] = new ArrayList<Integer>();
+        }
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		E = sc.nextInt();
-		adjList = new ArrayList[N + 1];
-		visited = new boolean[N + 1];
-		
-		for (int i = 1; i < N + 1; i++) {
-			adjList[i] = new ArrayList();
-		}
-		
-		for (int i = 0; i < E; i++) {
-			int from = sc.nextInt();
-			int to = sc.nextInt();
-			adjList[from].add(to);
-			adjList[to].add(from);
-		}
-		
-		result = 0;
-		for (int i = 1; i < N + 1; i++) {
-			if (!visited[i]) {
-				DFS(i);
-				result++;				
-			}
-		}
-		System.out.println(result);
-	}
-	
-	private static void DFS(int currNode) {
-//		System.out.print(currNode);
-		visited[currNode] = true;
-		for (int node : adjList[currNode]) {
-			if (!visited[node]) {
-				visited[node] = true;
-				DFS(node);
-			}
-		}
-	}
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            A[start].add(end); // 양방향이므로 양쪽에 방향을 더해주자
+            A[end].add(start);
+        }
+
+        int cnt = 0; // 연결 요소의 개수
+        for (int i = 1; i < N + 1; i++) {
+            if (!visited[i]) {
+                cnt++;
+                DFS(i);
+            }
+        }
+        System.out.println(cnt);
+    }
+
+    public static void DFS(int v) {
+        if (visited[v]) return; // 방문한 노드라면 바로 리턴
+        visited[v] = true;
+
+        for (int i : A[v]) {
+            if (visited[i] == false) {
+                DFS(i);
+            }
+        }
+    }
 }
