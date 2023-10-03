@@ -8,8 +8,6 @@ class Solution {
         // 1. 모든 조합의 숫자를 만든다
         recursive("", numbers);
 
-        System.out.println(numberSet);
-
         // 2. 소수의 개수만 센다
         Iterator<Integer> it = numberSet.iterator();
 
