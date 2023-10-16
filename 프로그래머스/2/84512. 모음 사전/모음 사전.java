@@ -28,10 +28,10 @@ class Solution {
     static void recursion(String str, int depth) {
         list.add(str);
         
-        // 종료조건: 재귀함수 내에서 해당 단어를 받으면 break;
+        // 종료조건: 재귀함수 내에서 깊이 5가 되면 return
         if (depth == 5) return;
         
-        // 수행동작: 재귀함수로 단어를 모두 생성하면서 재귀함수가 돌 때마다 count++
+        // 수행동작: 재귀함수로 단어를 모두 생성
         for (int i = 0; i < arr.length; i++) {
             recursion(str + arr[i], depth + 1);
         }
