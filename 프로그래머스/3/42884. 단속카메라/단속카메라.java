@@ -12,12 +12,12 @@ class Solution {
         // System.out.println(Arrays.deepToString(routes));
         
         int answer = 0;
-        int curEnd = Integer.MIN_VALUE;
+        int curCamera = Integer.MIN_VALUE;
         
         for (int i = 0; i < routes.length; i++) {
             
-            if (routes[i][0] > curEnd) {
-                curEnd = routes[i][1];
+            if (routes[i][0] > curCamera) {
+                curCamera = routes[i][1];
                 answer++;
             }
         }
