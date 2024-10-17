@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -14,9 +14,17 @@ public class Main {
         int e = Integer.parseInt(st.nextToken());
         int f = Integer.parseInt(st.nextToken());
 
-        StringBuilder sb = new StringBuilder();
-        sb.append((c * e- b * f) / (a * e - b * d) + " ");
-        sb.append((c * d - a * f) / (b * d - a * e) +"");
-        System.out.println(sb);
+        int x = 0, y = 0;
+        for (int i = -999; i <= 999; i++) {
+            for (int j = -999; j <= 999; j++) {
+                int one = a * i + b * j;
+                int two = d * i + e * j;
+                if (one == c && two == f) {
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+        System.out.println(x + " " + y);
     }
 }
