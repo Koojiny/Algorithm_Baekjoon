@@ -11,12 +11,12 @@ class Solution {
             land[i][3] += Math.max(Math.max(land[i - 1][0], land[i - 1][1]), land[i - 1][2]);
         }
         
-        //System.out.println(Arrays.deepToString(land));
+        // System.out.println(Arrays.deepToString(land));
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < land[0].length; i++) {
             answer = Math.max(answer, land[land.length - 1][i]);
         }
-
+        
         return answer;
     }
 }
