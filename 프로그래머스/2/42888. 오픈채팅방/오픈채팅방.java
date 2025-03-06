@@ -3,40 +3,46 @@ import java.util.*;
 class Solution {
     public String[] solution(String[] record) {
         HashMap<String, String> map = new HashMap<>();
-        ArrayList<String> resultList = new ArrayList<>();
+        ArrayList<String[]> arr = new ArrayList<>();
+        StringTokenizer st;
         
-        for (int i = 0; i < record.length; i++) {
-            String[] line = record[i].split(" ");
-            String command = line[0];
-            
-            switch (command) {
-                case "Enter":
-                    map.put(line[1], line[2]);
-                    resultList.add(line[1] + "/님이 들어왔습니다.");
-                    break;
-                
-                case "Leave":
-                    resultList.add(line[1] + "/님이 나갔습니다.");
-                    break;
-                    
-                case "Change":
-                    map.put(line[1], line[2]);
-                    break;
-                    
+        for (String r : record) {
+            st = new StringTokenizer(r);
+            String command = st.nextToken();
+                        
+            if (command.equals("Enter")) {
+                String id = st.nextToken();
+                String name = st.nextToken();
+                if (map.containsKey(id)) {
+                    map.put(id, name);
+                } else {
+                    map.put(id, name);
+                }                
+                arr.add(new String[]{id, "님이 들어왔습니다."});
+            } else if (command.equals("Leave")) {
+                String id = st.nextToken();
+                arr.add(new String[]{id, "님이 나갔습니다."});
+                // map.remove(id);                
+            } else if (command.equals("Change")) {
+                String id = st.nextToken();
+                String name = st.nextToken();
+                if (map.containsKey(id)) {
+                    map.put(id, name);                    
+                }
             }
         }
-        // System.out.println(map);
-        // System.out.println(resultList);
         
-        String[] answer = new String[resultList.size()];
+        // System.out.print(map);
+        String[] answer = new String[arr.size()];
+        for (int i = 0; i < arr.size(); i++) {
+            String[] cur = arr.get(i);
+            String id = cur[0];
+            answer[i] = map.get(id) + cur[1];
+            // System.out.print(map.get(id) + cur[1] + " ");
+        }            
         
-        for (int i = 0; i < resultList.size(); i++) {
-            String[] curLine = resultList.get(i).split("/");
-            String id = curLine[0];
-            String other = curLine[1];
-            
-            answer[i] = map.get(id) + other;
-        }
+        // System.out.print(arr.toString());
+        
         
         return answer;
     }
