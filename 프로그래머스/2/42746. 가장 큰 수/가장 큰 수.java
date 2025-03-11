@@ -8,7 +8,16 @@ class Solution {
             arr[i] = String.valueOf(numbers[i]);
         }
         
-        Arrays.sort(arr, (o1, o2) -> (o2 + o1).compareTo(o1 + o2));
+        Arrays.sort(arr, new Comparator<String>(){
+            @Override
+            public int compare(String a, String b) { //6 10
+                // int num1 = Integer.parseInt(a + b); //610
+                // int num2 = Integer.parseInt(b + a); //106
+                String s1 = a + b;
+                String s2 = b + a;
+                return s2.compareTo(s1);
+            }
+        });
         
         if (arr[0].equals("0")) return "0";
         
@@ -16,6 +25,7 @@ class Solution {
         for (int i = 0; i < arr.length; i++) {
             answer += arr[i];
         }
+        
         return answer;
     }
 }
