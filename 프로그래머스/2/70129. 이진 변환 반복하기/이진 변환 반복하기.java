@@ -6,7 +6,7 @@ class Solution {
         int count = 0;
         int zeroCnt = 0;
         
-        while (s.length() > 1) {
+        while (!s.equals("1")) {
             for (int i = 0; i < s.length(); i++) {
                 if (s.charAt(i) == '0') zeroCnt++;
             }
