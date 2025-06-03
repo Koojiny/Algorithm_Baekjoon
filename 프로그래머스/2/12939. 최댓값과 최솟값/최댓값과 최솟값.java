@@ -2,17 +2,15 @@ import java.util.*;
 
 class Solution {
     public String solution(String s) {
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
         StringTokenizer st = new StringTokenizer(s);
-        
-        int n = st.countTokens();
-        int[] arr = new int[n];
-        
-        for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+        while (st.hasMoreTokens()) {
+            int now = Integer.parseInt(st.nextToken());
+            if (now < min) min = now;
+            if (now > max) max = now;
         }
-        Arrays.sort(arr);
-        // System.out.println(Arrays.toString(arr));
         
-        return arr[0] + " " + arr[arr.length - 1];
+        return min + " " + max;
     }
 }
