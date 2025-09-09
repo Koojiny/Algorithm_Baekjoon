@@ -1,15 +1,24 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        System.out.println(Fivonacci(n));
-    }
 
-    public static int Fivonacci(int x) {
-        if (x == 0) return 0;
-        if (x == 1) return 1;
-        return Fivonacci(x - 1) + Fivonacci(x - 2);
+        if (n == 0) {
+            System.out.println(0);
+            return;
+        }
+
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 2] + dp[i - 1];
+        }
+
+        System.out.println(dp[n]);
     }
 }
