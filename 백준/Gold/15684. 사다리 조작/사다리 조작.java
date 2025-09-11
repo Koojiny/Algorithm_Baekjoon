@@ -28,7 +28,7 @@ public class Main {
         System.out.println(answer > 3 ? -1 : answer);
     }
 
-    static void dfs(int count, int x, int y) { // count : 현재까지 추가한 가로선의 수
+    static void dfs(int count, int x, int y) { // count : 현재까지 추가한 가로선의 수, x,y : 현재 가로선을 놓은 위치
         if (count >= answer) return;
 
         if (check()) { // 현재 상태가 유효하면 정답 갱신
@@ -38,11 +38,11 @@ public class Main {
 
         // 가로선 추가
         for (int i = x; i <= H; i++) { // 행만큼 진행
-            for (int j = 1; j < N; j++) { // 마지막 N에는 우측 세로선이 없으므로 N-1까지 진행
-                if (canPlace(i, j)) {
-                    board[i][j] = true;
-                    dfs(count + 1, i, j + 2);
-                    board[i][j] = false;
+            for (int j = (i == x ? y : 1); j < N; j++) { // 마지막 N에는 우측 세로선이 없으므로 N-1까지 진행
+                if (canPlace(i, j)) { // 가로선 놓을 수 있는 위치인지 확인
+                    board[i][j] = true; // 가로선 설치
+                    dfs(count + 1, i, j + 2); // 다음 위치 탐색 (j+2로 중복 방지)
+                    board[i][j] = false; // 되돌리기
                 }
             }
         }
