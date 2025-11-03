@@ -1,50 +1,59 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int N = Integer.parseInt(br.readLine());
-        Time[] times = new Time[N];
+
+        Work[] works = new Work[N];
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            int t = Integer.parseInt(st.nextToken());
-            int s = Integer.parseInt(st.nextToken());
-            times[i] = new Time(t, s);
+            int time = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            works[i] = new Work(time, end);
         }
 
-        Arrays.sort(times);
+        // 종료시간 기준 내림차순
+        Arrays.sort(works);
 
-        int endTime = times[0].end;
+        int start = works[0].end;
+        int idx = 0;
 
-        for (Time time : times) {
-            // 최대 가능한 종료 시간이 실제 끝내야하는 시간보다 늦으면 실제 끝내야하는 시간으로 갱신
-            if (endTime > time.end) {
-                endTime = time.end;
+        while (idx < N) {
+            if (start > works[idx].end) {
+                start = works[idx].end;
             }
-            endTime -= time.time;
-            
-            if (endTime < 0) {
+//            System.out.println("idx= " + idx + ", start=" + start + ", time=" + works[idx].time);
+
+            start = start - works[idx].time;
+
+            if (start < 0) {
                 System.out.println(-1);
                 return;
             }
+
+            idx++;
         }
-        
-        System.out.println(endTime);
+
+        System.out.println(start);
     }
 
-    static class Time implements Comparable<Time> {
+    static class Work implements Comparable<Work> {
         int time;
         int end;
 
-        public Time(int time, int end) {
+        public Work(int time, int end) {
             this.time = time;
             this.end = end;
         }
 
         @Override
-        public int compareTo(Time o) {
+        public int compareTo(Work o) {
             return o.end - this.end;
         }
     }
